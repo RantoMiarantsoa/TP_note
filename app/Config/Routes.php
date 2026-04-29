@@ -9,7 +9,6 @@ $routes->get('/', 'Home::index');
 $routes->get('/note', 'Note::index');
 
 $routes->post('/note/create', 'Note::create');
-$routes->post('/note/(:num)', 'Note::findByEtudiant/$1');
 $routes->delete('/note/(:num)', 'Note::delete/$1');
 $routes->put('/note/(:num)', 'Note::update/$1');
 $routes->get('/note/liste', 'Note::listNote');
