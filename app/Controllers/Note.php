@@ -19,11 +19,19 @@ class Note extends BaseController{
         return view('note/index', $data);
     }
 
-    public function findByEtudiant($etudiant_id){
-        $noteModel = new NoteModel();
-        $data['notes'] = $noteModel->where('etudiant_id', $etudiant_id)->findAll();
-        return view('note/index', $data);
-    }
+ public function findByEtudiant($etudiant_id)
+{
+    $noteModel = new NoteModel();
+
+    $data['notes'] = $noteModel->db->table('note')
+        ->select('note.note, Matiere.nom_matiere, Matiere.coefficient')
+        ->join('Matiere', 'Matiere.id = note.id_matiere')
+        ->where('note.id_etudiant', $etudiant_id)
+        ->get()
+        ->getResultArray();
+
+    return view('note/index', $data);
+}
 
     public function delete($id){
         $noteModel = new NoteModel();
@@ -40,4 +48,6 @@ class Note extends BaseController{
         $noteModel->update($id, $data);
     }
 
+
+    
 }
