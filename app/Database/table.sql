@@ -33,7 +33,7 @@ CREATE TABLE Matiere(
     coefficient INT NOT NULL,
     key_matiere VARCHAR(50) NOT NULL UNIQUE,
     id_semestre INT,
-    id_groupe INT,
+    id_groupe INT NULL,
     FOREIGN KEY (id_semestre) REFERENCES Semestre(id),
     FOREIGN KEY (id_groupe) REFERENCES groupe_mat(id_groupe)
 );

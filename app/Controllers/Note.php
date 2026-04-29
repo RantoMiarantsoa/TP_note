@@ -21,16 +21,11 @@ class Note extends BaseController{
 
  public function findByEtudiant($etudiant_id)
 {
-    $noteModel = new NoteModel();
+     $noteModel = new NoteModel();
 
-    $data['notes'] = $noteModel->db->table('note')
-        ->select('note.note, Matiere.nom_matiere, Matiere.coefficient')
-        ->join('Matiere', 'Matiere.id = note.id_matiere')
-        ->where('note.id_etudiant', $etudiant_id)
-        ->get()
-        ->getResultArray();
+        $data['notes'] = $noteModel->findNotesEtudiantAvecParcours($id_etudiant);
 
-    return view('note/index', $data);
+        return view('note/bulletin', $data);
 }
 
     public function delete($id){
@@ -49,5 +44,4 @@ class Note extends BaseController{
     }
 
 
-    
 }
